@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
 
@@ -93,18 +92,89 @@ public class Main {
         int sheet = 4; //лист
     }
 
-    private static ArrayList<int[][]> algorithm_1(ArrayList<Integer>[] graph, int[] fatherArray, ArrayList<int[]> bags) {
-        int countVertex = graph.length + 1;
+    private static ArrayList<int[][]> algorithm_1(ArrayList<Integer>[] graph, int[] fatherArray, ArrayList<int[]> bags, int[] nodeValue) {
+        int countVertex = graph.length;
+        int countBags = bags.size();
         ArrayList<int[][]> resultArrayLocalMatrix = new ArrayList<>();
         int index[] = new int[countVertex];
         int Ntop[] = new int[countVertex];
-        ArrayList<ArrayList<Integer>> L = new ArrayList<>();
+        ArrayList<int[]> L = new ArrayList<>();
         for (int i = 1; i < countVertex; i++) {
             index[i] = 0;
             Ntop[i] = 0;
-        } //1
-        for (int j = 1; j < countVertex; j++) {
-
+        }
+        L.set(0, bags.get(0));
+        //3
+        for (int u = 1; u < countBags; u++) {
+            int v = fatherArray[u]; //
+            L.set(u, null);
+            for (int j = 0; j < Xv; j++) {
+                index[Xj] = j;
+            }
+            for (int i = 0; i < Xu; i++) {
+                if (index[Xi] == 0) {
+                    L.set(u, L.get(u).add(Xi))
+                }
+                for (int j = 0; j < Xv; j++) {
+                    index[Xj] = 0;
+                }
+            }
+        }
+        //10
+        for (int u = 0; u < countBags; u++) {
+            for (int j = 0; j < Xu; j++) {
+                index[Xj] = j;
+            }
+            for (int x = 0; x < L.get(u).length; x++) {
+                for (int y = 0; y < Nx; y++) {
+                    if (index[y] > 0) {
+                        Ntop[x] = Ntop[x] + Ntop[y];//change
+                    }
+                }
+            }
+            for (int j = 0; j < Xu; j++) {
+                index[Xj] = 0;
+            }
+        }
+        //17
+        int[][] arr = {{1, 1}, {1, 1}};//delete
+        for (int i = 0; i < X1; i++) {
+            for (int j = 0; j < X1; j++) {
+                resultArrayLocalMatrix.add(arr);//function to fill matrix;
+            }
+            for (int j = 0; j < Ntop[Xi]; j++) {
+                resultArrayLocalMatrix.set(0, arr); //fill matrix 1
+            }
+        }
+        //21
+        for (int v = 1; v < countBags; v++) {
+            int u = fatherArray[v];//check
+            if (nodeValue[v] == 4) {
+                resultArrayLocalMatrix.set(v, arr);//change
+            } else if (nodeValue[u] == 2) {
+                resultArrayLocalMatrix.set(v, resultArrayLocalMatrix.get(u));
+            } else if (nodeValue[u] == 1 && a) {
+                //ressolve
+            } else if (nodeValue[u] == 3 && a) {
+                for (int i = 0; i < t; i++) {
+                    for (int j = 0; j < t; j++) {
+                        resultArrayLocalMatrix.set(v, resultArrayLocalMatrix.get(u));
+                    }
+                }
+                for (int i = t; i < Nu; i++) {
+                    for (int j = t; j < Nu; j++) {
+                        Av(i + 1, j + 1) = Au(i + 1, j + 1);
+                    }
+                }
+                for (int j = 0; j < Nu; j++) {
+                    Av(t, j) = 0;
+                    Av(j, t) = 0;
+                }
+                for (int j = 0; j < Ntop[Xt]; j++) {
+                    Av(t, j) = 1;
+                    Av(j, t) = 1;
+                }
+            }
         }
         return resultArrayLocalMatrix;
     }
@@ -115,6 +185,6 @@ public class Main {
         int[] fatherArray = {-1, 0, 1, 1, 2, 3, 4, 5, 6, 7, 8, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20};
         int[] nodeValue = {3, 2, 3, 1, 1, 3, 3, 1, 2, 4, 3, 1, 1, 3, 1, 1, 3, 1, 1, 4, 1, 4};
         ArrayList<int[]> bags = createBags();
-        tree_dec = algorithm_1(graph, fatherArray, bags);
+        tree_dec = algorithm_1(graph, fatherArray, bags, nodeValue);
     }
 }
